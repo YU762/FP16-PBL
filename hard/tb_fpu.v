@@ -20,22 +20,22 @@ module tb_fpu;
    reg 				 RSTN;
 
    wire [1:0] 			 op   = 2'h0; // FMA
-   reg  [31:0] 			 ex1;
-   reg  [31:0] 			 ex2;
-   reg  [31:0] 			 ex3;
+   reg  [15:0] 			 ex1;
+   reg  [15:0] 			 ex2;
+   reg  [15:0] 			 ex3;
    reg 				 cfma_force0;
-   wire [31:0] 			 exd;
+   wire [15:0] 			 exd;
 
    wire 			 ex1_d_s;
-   wire [8:0] 			 ex1_d_exp;
-   wire [24+`PEXT:0] 		 ex1_d_csa_s; //¢£¢£¢£
-   wire [24+`PEXT:0] 		 ex1_d_csa_c; //¢£¢£¢£
+   wire [5:0] 			 ex1_d_exp;
+   wire [11+`PEXT:0] 		 ex1_d_csa_s; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   wire [11+`PEXT:0] 		 ex1_d_csa_c; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
    wire 			 ex1_d_zero;
    wire 			 ex1_d_inf;
    wire 			 ex1_d_nan;
    wire 			 fadd_s1_s;
-   wire [8:0] 			 fadd_s1_exp;
-   wire [24+`PEXT:0] 		 fadd_s1_frac; //¢£¢£¢£
+   wire [5:0] 			 fadd_s1_exp;
+   wire [11+`PEXT:0] 		 fadd_s1_frac; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
    wire 			 fadd_s1_zero;
    wire 			 fadd_s1_inf;
    wire 			 fadd_s1_nan;
@@ -45,9 +45,9 @@ module tb_fpu;
       .ACLK               (ACLK                 ),
       .RSTN               (RSTN                 ),
       .op                 (op                   ),
-      .ex1                (ex1[31:0]            ),
-      .ex2                (ex2[31:0]            ),
-      .ex3                (ex3[31:0]            ),
+      .ex1                (ex1[15:0]            ),
+      .ex2                (ex2[15:0]            ),
+      .ex3                (ex3[15:0]            ),
       .force0             (1'b0                 ),
       .ex1_d_s            (ex1_d_s              ),
       .ex1_d_exp          (ex1_d_exp            ),
@@ -65,8 +65,8 @@ module tb_fpu;
       );
 
    wire 			 ex2_d_s;
-   wire [ 8:0] 			 ex2_d_exp;
-   wire [25+`PEXT:0] 		 ex2_d_frac; //¢£¢£¢£
+   wire [ 5:0] 			 ex2_d_exp;
+   wire [12+`PEXT:0] 		 ex2_d_frac; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
    wire 			 ex2_d_inf;
    wire 			 ex2_d_nan;
 
@@ -105,7 +105,7 @@ module tb_fpu;
       );
 
    parameter TIC1G        = 10;      // CPU CYCLE TIME
-   parameter SDELAY       = 1;       // CLKÊÑ²½¤«¤é¾¯¤·ÂÔ¤Ä
+   parameter SDELAY       = 1;       // CLKï¿½Ñ²ï¿½ï¿½ï¿½ï¿½é¾¯ï¿½ï¿½ï¿½Ô¤ï¿½
    
    always #(TIC1G/2) ACLK = ~ACLK;
 
@@ -122,10 +122,10 @@ module tb_fpu;
    endtask
 
    task CHECK_FPU;
-      input   [31:0]  ex1in;
-      input   [31:0]  ex2in;
-      input   [31:0]  ex3in;
-      input   [31:0]  exdin;
+      input   [15:0]  ex1in;
+      input   [15:0]  ex2in;
+      input   [15:0]  ex3in;
+      input   [15:0]  exdin;
       begin
 	ex1 = ex1in;
 	ex2 = ex2in;

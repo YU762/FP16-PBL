@@ -11,7 +11,7 @@
 `include "nbit_csa.v"
 `include "nbit_ndepth_queue.v"
 `include "nbit_register.v"
-`include "bit24_booth_wallace.v"
+`include "bit11_booth_wallace.v"
        
 module tb_fpu;
    reg  [9:0] 		         system_cycle;

@@ -22,17 +22,17 @@
 
 module bit11_booth_wallace
 (
-    input  wire [23:0]   ai,     /* multiplicand */
-    input  wire [23:0]   bi,     /* multiplier   */
-    output wire [47:0]   so,     /* Partial product */
-    output wire [47:0]   co      /* Partial product */
+    input  wire [10:0]   ai,     /* multiplicand */
+    input  wire [10:0]   bi,     /* multiplier   */
+    output wire [21:0]   so,     /* Partial product */
+    output wire [21:0]   co      /* Partial product */
 );
 // synopsys template
 
-    wire [24:0] sign_ext_ai    = {1'b0,ai};
-    wire [24:0] not_ai         = ~sign_ext_ai;
-    wire [24:0] shift_ai       = {ai,1'b0};
-    wire [24:0] shift_not_ai   = ~shift_ai;
+    wire [11:0] sign_ext_ai    = {1'b0,ai};
+    wire [11:0] not_ai         = ~sign_ext_ai;
+    wire [11:0] shift_ai       = {ai,1'b0};
+    wire [11:0] shift_not_ai   = ~shift_ai;
 
     // Depth:(24+3-1)/2=13
     //      first                         | middle ~ last
@@ -78,7 +78,7 @@ module bit11_booth_wallace
     wire [30:0] c0_1st;
     wire [32:0] s1_1st;
     wire [32:0] c1_1st;
-    wire [32:0] s2_1st;
+    wire [32:0] s2_1 st;
     wire [32:0] c2_1st;
     wire [31:0] s3_1st;
     wire [31:0] c3_1st;
